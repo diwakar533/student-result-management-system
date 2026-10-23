@@ -1,123 +1,73 @@
 # Student Result Management System
 
-A Python-based Student Result Management System developed using Streamlit. The application allows users to enter student details, calculate marks and grades, store results in an SQLite database, and retrieve student reports through a simple web interface.
+A Python web application built with Streamlit to enter student marks, calculate results, and save/retrieve student records using SQLite.
 
 ## Features
 
-- **Student Details:** Enter the register number and student name.
-- **Marks Management:** Enter marks for three subjects.
-- **Automatic Calculation:** Calculate total marks and percentage.
-- **Grade Calculation:** Assign grades based on percentage.
-- **Database Integration:** Store and retrieve student results using SQLite.
-- **Result Search:** Find student results using the register number.
-- **Multiple Report Formats:** Generate simple and detailed student reports.
-- **Input Validation:** Validate student information and marks.
-- **User Interface:** Custom CSS styling with a yellow, blue, teal, red, and burgundy colour palette.
+- Enter a student's register number and name.
+- Enter marks for three subjects (each out of 100).
+- Calculate total marks, percentage, and grade.
+- Save records in an SQLite database.
+- Search for a student's result by register number.
+- Display a Simple Report or Detailed Report.
+- View all saved student records.
+- Validate required fields and restrict marks to the range 0–100.
+- Use a custom UI colour palette inspired by yellow, blue, teal, red, and burgundy.
 
-## Technologies Used
+## Technologies
 
 - Python
 - Streamlit
 - SQLite
-- Object-Oriented Programming (OOP)
-- HTML and CSS styling through Streamlit
+- HTML/CSS (custom Streamlit styling)
 
-## Object-Oriented Programming Concepts
+## Object-Oriented Programming (OOP) concepts
 
-### 1. Classes and Objects
-The `Student` class organizes student information and result-related operations.
+- **Class and object:** `Student` represents a student and provides methods to calculate totals, percentages, grades, and record data.
+- **Inheritance:** `SimpleStudentReport` and `DetailedStudentReport` inherit from `StudentReport`.
+- **Abstraction:** `StudentReport` is an abstract base class with an abstract `generate_report()` method.
+- **Polymorphism / method overriding:** Both report classes implement `generate_report()` differently. The app calls the same method on the selected report object and receives a different report format.
 
-### 2. Encapsulation
-Student data and related methods are organized within classes to improve code structure.
+## Requirements
 
-### 3. Inheritance
-The `SimpleStudentReport` and `DetailedStudentReport` classes inherit from the common `StudentReport` base class.
+- Python 3.10 or later
+- pip
 
-### 4. Polymorphism
-Both report classes implement the `generate_report()` method differently. The same method call can generate different report formats depending on the object.
+## Run locally
 
-### 5. Abstraction
-The abstract `StudentReport` class defines a common interface for report generation.
+1. Clone or download this repository.
+2. Open a terminal in the project folder.
+3. Install the dependencies:
 
-## Installation and Setup
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
 
-### Prerequisites
-- Python installed on your computer
-- Visual Studio Code or another Python editor
+4. Run the app:
 
-### Step 1: Clone the Repository
+   ```bash
+   python -m streamlit run app.py
+   ```
 
-```bash
-git clone https://github.com/diwakar533/student-result-management-system.git
-```
-
-### Step 2: Open the Project Folder
-
-```bash
-cd student-result-management-system
-```
-
-### Step 3: Install Dependencies
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-### Step 4: Run the Application
-
-```bash
-python -m streamlit run app.py
-```
-
-The application will open in your browser, usually at `http://localhost:8501`.
-
-## How to Use
-
-1. Open the application.
-2. Select **Marks Entry** from the sidebar.
-3. Enter the student's register number and name.
-4. Enter the marks for the three subjects.
-5. Click **Save Result**.
-6. Select **View Result** to retrieve the saved record.
-7. Choose Simple Report or Detailed Report to view the result in the desired format.
-
-## Example
-
-| Subject | Marks |
-|---|---:|
-| Subject 1 | 50 |
-| Subject 2 | 60 |
-| Subject 3 | 70 |
-| **Total** | **180/300** |
-| **Percentage** | **60%** |
-| **Grade** | **B+** |
-
-*The grade depends on the grading rules configured in the application.*
+5. Open the local URL shown in the terminal (usually `http://localhost:8501`).
 
 ## Database
 
-The application uses SQLite to store student results. Records can be retrieved after refreshing or restarting the application, provided the same database file is retained.
+The app automatically creates `student_results.db` in the same folder as `app.py` when it first runs. The database stores saved student results between app sessions. Keep this file if you want to retain your local records. The database file is excluded from Git by `.gitignore` so personal/student records are not accidentally uploaded.
 
-## Future Enhancements
+## Grade rules
 
-- Support for more subjects.
-- Student login and authentication.
-- Export student reports as PDF.
-- Admin dashboard and result analytics.
-- Improved database management and report generation.
+The current grade rules are defined in `Student.calculate_grade()`:
 
-## Learning Outcomes
+- 90% and above: O
+- 80–89.99%: A+
+- 70–79.99%: A
+- 60–69.99%: B+
+- 50–59.99%: B
+- Below 50%: F
 
-Through this project, I gained practical experience in Python programming, Streamlit application development, database integration, input validation, and object-oriented programming concepts such as inheritance, abstraction, and polymorphism.
+Adjust these rules if your institution uses a different grading scale.
 
-## Author
+## Limitations
 
-**Diwakar Sathish**
-
-B.Tech Information Technology Student
-
-GitHub: [diwakar533](https://github.com/diwakar533)
-
----
-
-If you find this project useful, feel free to explore the repository and share your feedback.
+This is a learning project. It does not include authentication, role-based permissions, or production-grade security. Do not upload real student data or secrets to a public repository.

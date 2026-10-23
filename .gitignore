@@ -1,0 +1,14 @@
+# Local database and student records
+student_results.db
+*.db
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local environment/config files
+.env
+.DS_Store
